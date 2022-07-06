@@ -13,6 +13,7 @@ const dataReactive = reactive({
 });
 
 const toDoText = ref("");
+const { data } = await useFetch(() => `api/user/1`);
 
 // computed
 const computed1 = computed(() => text + "computed1");
@@ -20,7 +21,7 @@ const computed2 = computed(() => text + "computed2");
 
 // method
 const test = () => {
-  return console.log("test" + counter.value);
+  return console.log(data.value);
 };
 
 // createdわからん
@@ -34,6 +35,8 @@ const { counter, inc, dec } = useSharedCounter();
 // mounted
 onMounted(() => {
   console.log(counter.value);
+  console.log(toDoText);
+  console.log(data.value);
 });
 </script>
 
