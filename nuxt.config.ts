@@ -14,4 +14,11 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  css: ["~/assets/css/shadow.css"],
+
+  buildModules: [
+    // https://go.nuxtjs.dev/tailwindcss
+    "@nuxtjs/tailwindcss",
+  ],
 });

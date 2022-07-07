@@ -41,8 +41,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <input v-model="dataReactive.toDoText" />
-    <button @click="test">button</button>
+  <div class="container mx-auto">
+    <div class="flex flex-col">
+      <span class="text-gray-800 text-4xl my-16">ToDo List</span>
+      <div class="flex flex-row">
+        <input
+          class="shadow h-10 w-48 px-4 py-2 m-2"
+          v-model="dataReactive.toDoText"
+        />
+        <button
+          class="shadow text-gray-800 h-10 w-16 px-4 py-2 m-2"
+          @click="test"
+        >
+          add
+        </button>
+      </div>
+    </div>
   </div>
 </template>
