@@ -2,6 +2,11 @@
 
 nuxt3 で todo アプリを作ってみる
 
+## Storybook の導入
+
+- Nuxt3 は storybook に対応していないので別途 Vite を使用していれる
+  参考：https://zenn.dev/shunk_py/articles/a52625f98fc8e7
+
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
 ## Setup
