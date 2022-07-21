@@ -3,41 +3,22 @@ const text: string = "Hello, World!";
 
 // data
 const textRef = ref("ref data");
-// data こっちの方がv2のdataに近い？
-const dataReactive = reactive({
-  form: {
-    name: "",
-  },
-  users: [],
-  toDoText: "",
-});
+const fetchUserList = ref();
 
-const toDoText = ref("");
-// const { data } = await useFetch(() => `/api/user/1`);
+const { data: post } = await useFetch(() => `/api/users`);
 // const { users } = await useFetch(() => `/api/users`);
 
 // computed
-const computed1 = computed(() => text + "computed1");
+const computed1 = computed(() => useFetch(() => `/api/user/3`));
 const computed2 = computed(() => text + "computed2");
 
-// method
-const test = () => {
-  // return console.log(data);
-};
-
-// createdわからん
-setTimeout(() => {
-  console.log("created");
-}, 3000);
-
-// usestate状態管理
-const { counter, inc, dec } = useSharedCounter();
-
-// mounted
 onMounted(() => {
-  // console.log(data.value);
-  // console.log(users.value);
+  // console.log(useFetch(() => `/api/users`));
 });
+
+const test = () => {
+  return console.log(useFetch(() => `/api/users`));
+};
 </script>
 
 <template>
@@ -45,16 +26,12 @@ onMounted(() => {
     <div class="flex flex-col">
       <span class="text-gray-800 text-4xl my-16">ToDo List</span>
       <div class="flex flex-row">
-        <input
-          class="shadow h-10 w-48 px-4 py-2 m-2"
-          v-model="dataReactive.toDoText"
-        />
+        <input class="shadow h-10 w-48 px-4 py-2 m-2" />
         <button
           class="shadow text-gray-800 h-10 w-16 px-4 py-2 m-2"
           @click="test"
-        >
-          add
-        </button>
+        ></button>
+        {{ post }}
       </div>
     </div>
   </div>

@@ -35,6 +35,7 @@ const { counter, inc, dec } = useSharedCounter();
 
 // mounted
 onMounted(() => {
+  fetch;
   // console.log(data.value);
   // console.log(users.value);
 });
