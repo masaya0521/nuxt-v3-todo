@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { todoList, doneList } = useTodo();
+const { todoList, doneList, done } = useTodo();
 </script>
 
 <template>
@@ -9,7 +9,7 @@ const { todoList, doneList } = useTodo();
       <li class="flex justify-between p-5" v-for="todo in todoList">
         <span class="w-48">title : {{ todo.title }} </span>
         <span class="w-48">content : {{ todo.content }} </span>
-        <button class="shadow h-8 w-16">Done</button>
+        <button class="shadow h-8 w-16" @click="done(todo.id)">Done</button>
       </li>
     </ul>
   </div>
