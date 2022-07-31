@@ -7,6 +7,7 @@ type Todo = {
   status: Done;
 };
 
+// 指定したキーの値オブジェクトを持つ型になる
 type Form = Pick<Todo, "title" | "content">;
 
 type Done = "done" | "wip";
@@ -35,7 +36,7 @@ export function useTodo() {
   // 状態管理の宣言
   const todos = useState<Todo[]>(KEY, fetch);
 
-  const todolist = computed(() => {
+  const todoList = computed(() => {
     return todos.value.filter((t) => t.status === "wip");
   });
 
@@ -43,7 +44,49 @@ export function useTodo() {
     return todos.value.filter((t) => t.status === "done");
   });
 
+  function createTodo(form: Form) {
+    const lastId = Math.max(...todos.value.map((t) => t.id));
+    todos.value.push({
+      id: lastId + 1,
+      title: form.title,
+      content: form.content,
+      status: "wip",
+    });
+  }
+
+  function done(id: number) {
+    todos.value.forEach((todo) => {
+      if (todo.id === id) {
+        todo.status = "done";
+      }
+    });
+  }
+
   return {
-    todos,
+    todos: readonly(todos),
+    todoList,
+    doneList,
+
+    createTodo,
+    done,
+  };
+}
+
+export function useForm() {
+  const form = ref<Form>({
+    title: "",
+    content: "",
+  });
+
+  function clear() {
+    form.value = {
+      title: "",
+      content: "",
+    };
+  }
+
+  return {
+    form,
+    clear,
   };
 }
