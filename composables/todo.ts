@@ -44,7 +44,7 @@ export function useTodo() {
     return todos.value.filter((t) => t.status === "done");
   });
 
-  function createTodo(form: Form) {
+  function createTodo(form: Form): void {
     const lastId = Math.max(...todos.value.map((t) => t.id));
     todos.value.push({
       id: lastId + 1,
