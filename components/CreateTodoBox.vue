@@ -12,19 +12,19 @@ function createTodo() {
   <div>
     <input
       class="shadow h-10 w-48 px-4 py-2 m-2"
-      placeholder="タイトル"
+      placeholder="title"
       v-model="form.title"
     />
     <input
       class="shadow h-10 w-48 px-4 py-2 m-2"
-      placeholder="内容"
+      placeholder="content"
       v-model="form.content"
     />
     <button
-      class="shadow text-gray-800 h-10 w-16 px-4 py-2 m-2"
+      class="shadow text-gray-700 h-10 w-16 px-4 py-2 m-2"
       @click="createTodo()"
     >
-      追加
+      Add
     </button>
   </div>
 </template>
