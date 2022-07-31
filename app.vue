@@ -1,16 +1,16 @@
 <script setup lang="ts">
-const text: string = "Hello, World!";
+// const text: string = "Hello, World!";
 
 // data
-const textRef = ref("ref data");
-const fetchUserList = ref();
+// const post = ref("ref data");
+// const fetchUserList = ref();
 
 const { data: post } = await useFetch(() => `/api/users`);
 // const { users } = await useFetch(() => `/api/users`);
 
 // computed
-const computed1 = computed(() => useFetch(() => `/api/user/3`));
-const computed2 = computed(() => text + "computed2");
+// const computed1 = computed(() => useFetch(() => `/api/user/3`));
+// const computed2 = computed(() => text + "computed2");
 
 onMounted(() => {
   // console.log(useFetch(() => `/api/users`));

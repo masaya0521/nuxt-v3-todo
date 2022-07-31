@@ -7,6 +7,8 @@ type Todo = {
   status: Done;
 };
 
+type Form = Pick<Todo, "title" | "content">;
+
 type Done = "done" | "wip";
 
 const KEY = "todo";
@@ -32,6 +34,15 @@ function fetch() {
 export function useTodo() {
   // 状態管理の宣言
   const todos = useState<Todo[]>(KEY, fetch);
+
+  const todolist = computed(() => {
+    return todos.value.filter((t) => t.status === "wip");
+  });
+
+  const doneList = computed(() => {
+    return todos.value.filter((t) => t.status === "done");
+  });
+
   return {
     todos,
   };
