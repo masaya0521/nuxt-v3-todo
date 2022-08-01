@@ -1,4 +1,5 @@
 import { ref, Ref } from "vue";
+import axios, { AxiosResponse } from "axios";
 
 type Todo = {
   id: number;
@@ -14,7 +15,7 @@ type Done = "done" | "wip";
 
 const KEY = "todo";
 
-function fetch() {
+function fetch(): Ref<Todo[]> {
   const todos: Ref<Todo[]> = ref<Todo[]>([
     {
       id: 1,
@@ -32,9 +33,21 @@ function fetch() {
   return todos;
 }
 
+async function fetchAxios() {
+  let fetchTodo: [];
+  await axios.get(`/api/user/1`).then((res) => {
+    fetchTodo = res.data;
+  });
+  console.log(fetchTodo);
+  return fetchTodo;
+}
+
 export function useTodo() {
   // 状態管理の宣言
+
   const todos = useState<Todo[]>(KEY, fetch);
+
+  const fetchTodo = fetchAxios();
 
   const todoList = computed(() => {
     return todos.value.filter((t) => t.status === "wip");
@@ -66,6 +79,7 @@ export function useTodo() {
     todos: readonly(todos),
     todoList,
     doneList,
+    fetchTodo,
 
     createTodo,
     done,
