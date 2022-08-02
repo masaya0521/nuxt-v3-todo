@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { CreateTodoBox } from "~~/.nuxt/components";
 import { TodoList } from "~~/.nuxt/components";
+
+//const { data: data } = await useFetch(() => `/api/todos`);
+//console.log(data.value);
+// const { data, pending, error, refresh } = await useAsyncData("todos", () =>
+//   $fetch("/api/todos")
+// );
+
+// mounted
+//onMounted(async () => {
+//  const { data: data } = await useFetch(() => `/api/todos`);
+//});
 </script>
 
 <template>

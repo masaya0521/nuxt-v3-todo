@@ -1,5 +1,13 @@
 <script setup lang="ts">
 const { todoList, doneList, done } = useTodo();
+
+const { data: data } = await useFetch(() => `/todos`);
+//console.log(data.value);
+
+//const { data } = await useAsyncData("todos", () => $fetch("/api/todos"), {
+//  initialCache: false,
+//});
+console.log(data.value);
 </script>
 
 <template>
@@ -22,4 +30,5 @@ const { todoList, doneList, done } = useTodo();
       </li>
     </ul>
   </div>
+  {{ data }}
 </template>

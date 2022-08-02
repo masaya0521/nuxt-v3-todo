@@ -38,7 +38,6 @@ async function fetchAxios() {
   await axios.get(`/api/user/1`).then((res) => {
     fetchTodo = res.data;
   });
-  console.log(fetchTodo);
   return fetchTodo;
 }
 
@@ -46,8 +45,6 @@ export function useTodo() {
   // 状態管理の宣言
 
   const todos = useState<Todo[]>(KEY, fetch);
-
-  const fetchTodo = fetchAxios();
 
   const todoList = computed(() => {
     return todos.value.filter((t) => t.status === "wip");
@@ -79,7 +76,6 @@ export function useTodo() {
     todos: readonly(todos),
     todoList,
     doneList,
-    fetchTodo,
 
     createTodo,
     done,
