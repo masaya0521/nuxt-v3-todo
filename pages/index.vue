@@ -2,8 +2,8 @@
 import { CreateTodoBox } from "~~/.nuxt/components";
 import { TodoList } from "~~/.nuxt/components";
 
-//const { data: data } = await useFetch(() => `/api/todos`);
-//console.log(data.value);
+const { data: data } = await useFetch(() => `http://localhost:8080/todos`);
+console.log(data.value);
 // const { data, pending, error, refresh } = await useAsyncData("todos", () =>
 //   $fetch("/api/todos")
 // );
@@ -21,5 +21,6 @@ import { TodoList } from "~~/.nuxt/components";
       <CreateTodoBox />
       <TodoList />
     </div>
+    {{ data }}
   </div>
 </template>
