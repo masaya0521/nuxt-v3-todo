@@ -8,6 +8,14 @@ type Todo = {
   status: Done;
 };
 
+type fetchTodo = {
+  todo_id: string;
+  user_id: string;
+  title: string;
+  content: string;
+  status: string;
+};
+
 // 指定したキーの値オブジェクトを持つ型になる
 type Form = Pick<Todo, "title" | "content">;
 
@@ -15,7 +23,9 @@ type Done = "done" | "wip";
 
 const KEY = "todo";
 
-function fetch(): Ref<Todo[]> {
+function fetchTodoListFactory(): Ref<Todo[]> {
+  console.log("enter");
+
   const todos: Ref<Todo[]> = ref<Todo[]>([
     {
       id: 1,
@@ -30,21 +40,60 @@ function fetch(): Ref<Todo[]> {
       status: "wip",
     },
   ]);
+
+  //const test = todos.value.map((todo) => console.log("test"));
+
+  //const data: fetchTodo[] = fetchAxios() as unknown as fetchTodo[];
+  /*
+  const datas = data.map((todo, index) => {
+    return {
+      id: todo.todo_id,
+      title: todo.title,
+      content: todo.content,
+      status: todo.status,
+    };
+  });
+
+  let tmpTodos: Todo[];
+  for(const todo of data){
+    
+  }
+  */
+  /*
+  const test: Todo[] = data.map((todo, index) => {
+    return {
+      id: todo.todo_id,
+      title: todo.title,
+      content: todo.content,
+      status: todo.status,
+    };
+  });
+  */
+  /*
+  const todos: Ref<Todo[]> = ref<Todo[]>(
+    data.map((todo, index) => {
+      return {
+        id: todo.todo_id,
+        title: todo.title,
+        content: todo.content,
+        status: todo.status,
+      };
+    })
+  );
+  */
+
   return todos;
 }
 
-async function fetchAxios() {
-  let fetchTodo: [];
-  await axios.get(`/api/user/1`).then((res) => {
-    fetchTodo = res.data;
-  });
-  return fetchTodo;
+async function fetchAxios(): Promise<fetchTodo[]> {
+  const data: fetchTodo[] = await $fetch(`/api/todos`);
+  return data;
 }
 
 export function useTodo() {
   // 状態管理の宣言
 
-  const todos = useState<Todo[]>(KEY, fetch);
+  const todos = useState<Todo[]>(KEY, fetchTodoListFactory);
 
   const todoList = computed(() => {
     return todos.value.filter((t) => t.status === "wip");
